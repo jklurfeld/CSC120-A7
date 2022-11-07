@@ -80,14 +80,27 @@ public class Cafe extends Building{
     public void showOptions() {
         super.showOptions();
         System.out.println(" + sellCoffee(size, nSugarPackets, nCreams)");
-      }
+    }
     
+    public void goToFloor(int floorNum){
+        if (floorNum < 1 || floorNum > this.nFloors) {
+            throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
+        }
+        if (floorNum != 1){
+            throw new RuntimeException(("Invalid floor number. This floor is for employees only."));
+        }
+        System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+        this.activeFloor = floorNum;
+    }
+
     public static void main(String[] args) {
-        Cafe c = new Cafe("Compass", "Smith", 1);
+        Cafe c = new Cafe("Compass", "Smith", 2);
         c.sellCoffee(16, 40,2);
         System.out.println(c.nSugarPackets);
         c.sellCoffee(2,80,1);
         System.out.println(c.nSugarPackets);
+        c.showOptions();
+        c.enter();
     }
     
 }

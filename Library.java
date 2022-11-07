@@ -4,21 +4,30 @@ import java.util.Hashtable;
 public class Library extends Building{
 
   private Hashtable<String, Boolean> collection;
+  boolean hasElevator;
 
   /* Constructor */
-  public Library(String name, String address, int nFloors) {
+  public Library(String name, String address, int nFloors, boolean hasElevator) {
     super(name, address, nFloors);
     collection = new Hashtable<String, Boolean>();
+    this.hasElevator = hasElevator;
   }
 
   /* Constructor that just takes the name */
   public Library(String name){
-    super(name, "<address unknown>", 1);
+    this(name, "<address unknown>", 1, false);
   }
 
   /* Constructor that takes no parameters */
   public Library(){
-    super("<name unknown>","<address unknown>", 1);
+    this("<name unknown>","<address unknown>", 1, false);
+  }
+
+  /* Accessor for hasElevator
+   * @return boolean telling the user whether the library has an elevator
+   */
+  public boolean hasElevator(){
+    return hasElevator;
   }
 
   /* Adds a book to the collection 
@@ -90,9 +99,25 @@ public class Library extends Building{
     super.showOptions();
     System.out.println(" + checkOut(title) \n + returnBook(title)");
   }
+
+  public void goToFloor(int floorNum) {
+    if (this.activeFloor == -1) {
+        throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
+    }
+    if (floorNum < 1 || floorNum > this.nFloors) {
+        throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
+    }
+    if (Math.abs(floorNum - activeFloor) > 1){
+      if (!hasElevator){
+        throw new RuntimeException("You cannot transport up more than one flight of stairs at a time.");
+      }
+    }
+    System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+    this.activeFloor = floorNum;
+  }
   
   public static void main(String[] args) {
-    Library myLib = new Library("Neilson", "1 Green Street", 4);
+    Library myLib = new Library("Neilson", "1 Green Street", 4, true);
     myLib.addTitle("The Lorax by Dr. Seuss");
     myLib.addTitle("Harry Potter by JK Rowling");
     myLib.checkOut("Harry Potter by JK Rowling");
@@ -102,5 +127,7 @@ public class Library extends Building{
     System.out.println(myLib.isAvailable("The Lorax by Dr. Seuss"));
     myLib.printCollection();
     myLib.showOptions();
+    myLib.enter();
+    myLib.goToFloor(4);
   }
 }

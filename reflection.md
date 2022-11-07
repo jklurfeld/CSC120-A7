@@ -1,8 +1,9 @@
 - Which methods did you decide to `overload`, and why? 
 In the cafe class, I overloaded the constructor so you could a have constructor that just takes a name and an address and sets the number of floors to a default value of 1, because most cafes are only going to have one floor. I also overloaded the sellCoffee method so it just takes a size in case someone wanted to order a black coffee.
 
-In the house class, I overloaded the constructor in two different ways because it didn't make sense to overload any of the other methods in this class. I made a constructor that takes no parameters and sets all of the attributes to default values, and I made a constructor that takes a name, number of floors, and whether it has a dining hall in case you don't know what the address is, because I think this is the least commonly known information.
+In the house class, I overloaded the constructor in two different ways because it didn't make sense to overload any of the other methods in this class. I made a constructor that takes no parameters and sets all of the attributes to default values, and I made a constructor that takes a name, number of floors, and whether it has a dining hall in case you don't know what the address is and whether it has an elevator, because I think this is the least commonly known information.
 
 In the library class, I overloaded the constructor in two different ways for the same reason as the house class; I thought it didn't make sense to overload any of the other methods in this class without just printing an error message. So, I made a constructor that takes just a name and sets the address and number of floors to default values, and I made a constructor that takes no parameters and sets all of the attributes to default values.
 
 - What worked, what didn't, what advice would you give someone taking this course in the future?
+Some advice I would give someone taking this course in the future is to use the code that's given to you in the Building class as a reference in case you need reminders on how to overload a constructor or how to throw a RuntimeExcecption.
